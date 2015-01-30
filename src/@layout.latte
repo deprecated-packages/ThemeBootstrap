@@ -53,12 +53,14 @@
 						<li n:class="'tree' === $active ? active" n:if="$config->tree">
 							<a n:tag-if="'tree' !== $active" href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 						</li>
-						<li n:class="'deprecated' === $active ? active" n:if="$config->deprecated">
-							<a n:tag-if="'deprecated' !== $active" href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
-						</li>
-						<li n:class="'todo' === $active ? active" n:if="$config->todo">
-							<a n:tag-if="'todo' !== $active" href="todo.html" title="Todo list"><span>Todo</span></a>
-						</li>
+
+						{foreach $annotationGroups as $annotation}
+							<li n:class="$active === 'annotation-group-' . $annotation ? active">
+								<a n:tag-if="$active !== 'annotation-group-' . $annotation" href="annotation-group-{$annotation}.html" title="List of elements with {$annotation} annotation">
+									<span>{$annotation|firstUpper}</span>
+								</a>
+							</li>
+						{/foreach}
 
 						<li class="divider-vertical" n:if="$config->download"></li>
 
