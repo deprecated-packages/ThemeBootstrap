@@ -510,3 +510,19 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
 .right, .summary td.right {
 	text-align: right;
 }
+
+
+@media print { 
+
+    #left, #splitter, #navigation, #search, a.anchor, .short {
+        display:none;
+    }
+
+    #right {
+        margin-left: 0px;
+    }
+
+    .detailed {
+        display: block;
+    }
+}
