@@ -373,7 +373,7 @@ td.name, td.attributes {
 	height: 100%;
 	width: 5px;
 	left: 270px;
-	background: #0088cc url('resize.png') left center no-repeat;
+	background: black url('resize.png') left center no-repeat;
 	cursor: e-resize;
 }
 
@@ -511,7 +511,6 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
 	text-align: right;
 }
 
-
 @media print { 
 
     #left, #splitter, #navigation, #search, a.anchor, .short {
@@ -520,6 +519,7 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
 
     #right {
         margin-left: 0px;
+		overflow: visible;
     }
 
     .detailed {
