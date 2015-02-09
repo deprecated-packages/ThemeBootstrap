@@ -1,7 +1,10 @@
 {layout '@layout.latte'}
 {var $active = 'constant'}
 
+
 {block title}{if $constant->deprecated}Deprecated {/if}Constant {$constant->name}{/block}
+
+
 
 {block content}
 <div id="content" class="constant">
