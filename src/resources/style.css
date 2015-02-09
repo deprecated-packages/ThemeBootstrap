@@ -545,7 +545,11 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
 	background-color: rgba(0,0,0,0.2) ; 
 }
 
-.navbar .nav > li.divider-vertical { display: none};
+.navbar .nav > li.divider-vertical { 
+/*	display: none;*/
+	border:none;
+	background: rgba(255,255,255,0.2);
+};
 
 .nav > li > a {
 	color: white;
