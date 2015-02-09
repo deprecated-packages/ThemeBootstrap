@@ -233,15 +233,15 @@ pre code {
 
 .navbar .nav > li > span {
 	display: block;
-	color: #999999;
+	color: white;
 	line-height: 19px;
 	padding: 10px 10px 11px;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .navbar .nav > li.active > span {
-	background-color: #222222;
-	color: #ffffff;
+	background-color: rgba(0,0,0,0.3);
+	color: white;
 }
 
 /* Content */
@@ -373,7 +373,7 @@ td.name, td.attributes {
 	height: 100%;
 	width: 5px;
 	left: 270px;
-	background: black url('resize.png') left center no-repeat;
+	background-image: url('resize.png') left center no-repeat;
 	cursor: e-resize;
 }
 
@@ -511,6 +511,7 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
 	text-align: right;
 }
 
+/* print support */
 @media print { 
 
     #left, #splitter, #navigation, #search, a.anchor, .short {
@@ -525,4 +526,31 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
     .detailed {
         display: block;
     }
+}
+
+/* color theme  */
+.navbar-fixed-top .container {
+	/* blue */
+	background-color: rgba(100,100,250,0.4) ; 
+
+	/* red */
+/*	background-color: rgba(200,40,40,1) ; */
+	
+	/* green */
+/*	background-color: rgba(90,180,40,1) ; */
+
+}
+#splitter  {
+	width: 1px;
+	background-color: rgba(0,0,0,0.2) ; 
+}
+
+.navbar .nav > li.divider-vertical { display: none};
+
+.nav > li > a {
+	color: white;
+}
+
+.nav > li > a > span {
+	color:white;
 }
