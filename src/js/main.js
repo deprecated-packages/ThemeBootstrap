@@ -48,6 +48,7 @@ $(window).load(function() {
 			matchContains: true,
 			scrollHeight: 200,
 			max: 20,
+			width: 300,
 			noRecord: '',
 			highlight: function(value, term) {
 				var term = term.toUpperCase().replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1").replace(/[A-Z0-9]/g, function(m, offset) {
@@ -130,12 +131,17 @@ $(window).load(function() {
 
 	// Open details
 	if (ApiGen.config.options.elementDetailsCollapsed) {
-		$('tr', $content).filter(':has(.detailed)')
-			.click(function() {
-				var $this = $(this);
-				$('.short', $this).hide();
-				$('.detailed', $this).show();
-			});
+		$(document.body).on('click', 'tr', function(ev) {
+
+			var short = this.querySelector('.short')
+			, detailed = this.querySelector('.detailed')
+
+			if (!short || !detailed) return
+
+			$(short).toggleClass('hidden')
+			$(detailed).toggleClass('hidden')
+
+		})
 	}
 
 	// Splitter
