@@ -234,7 +234,7 @@ $(window).load(function() {
 
 		var $firstLine = $('#' + parseInt(matches[0]));
 		if ($firstLine.length > 0) {
-			$document.scrollTop($firstLine.offset().top);
+			$right.scrollTop($firstLine.position().top);
 		}
 	}
 
