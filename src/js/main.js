@@ -243,8 +243,8 @@ $(window).load(function() {
 	$('.l a').click(function(event) {
 		event.preventDefault();
 
-		var $selectedLine = $(this).parent();
-		var selectedLine = parseInt($selectedLine.attr('id'));
+		var selectedLine = $(this).parent().index() + 1;
+		var $selectedLine = $('pre.code .l').eq(selectedLine - 1);
 
 		if (event.shiftKey) {
 			if (lastLine) {
