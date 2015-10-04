@@ -102,7 +102,7 @@
 
 	{if $ownMethods || $inheritedMethods || $usedMethods || $ownMagicMethods || $usedMagicMethods}
 		{define method}
-		<tr data-order="{$method->name}" id="{if $method->magic}m{/if}_{$method->name}" n:class="$method->deprecated ? deprecated">
+		<tr data-order="{$method->name}" id="{if $method->magic}m{/if}_{$method->name}">
 			{var $annotations = $method->annotations}
 
 			<td class="attributes"><code>
@@ -114,7 +114,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#{if $method->magic}m{/if}_{$method->name}">#</a>
-			<code>{block|strip}
+			<code n:class="$method->deprecated ? deprecated">{block|strip}
 				{if $class->internal}
 					<a href="{$method|manualUrl}" title="Go to PHP documentation">{$method->name}</a>(
 				{else}
