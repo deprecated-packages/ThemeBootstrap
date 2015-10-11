@@ -30,7 +30,7 @@
 
 	{var $annotations = $function->annotations}
 
-	{if $function->numberOfParameters}
+	{if count($function->parameters)}
 	<div class="panel panel-default">
         <div class="panel-heading"><h2>Parameters summary</h2></div>
 		<table class="summary table table-bordered table-striped" id="parameters">
