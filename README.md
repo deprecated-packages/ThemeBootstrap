@@ -6,3 +6,9 @@
 Uses [Twitter Bootstrap 3.3.2](https://github.com/twbs/bootstrap/releases/tag/v3.3.2), *released on 2015-01-19* 
 
 ![Twitter Bootstrap Theme](screenshot.png)
+
+## Usage
+Add `--template-theme bootstrap` to Apigen command like :
+
+    apigen generate --source app --destination docs/api/v1 --template-theme bootstrap
+
