@@ -73,7 +73,7 @@
 		<form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" role="search">
 			<input type="hidden" name="cx" value="{$config->googleCseId}">
 			<input type="hidden" name="ie" value="UTF-8">
-			<input type="text" name="q" class="search-query" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
+			<input type="text" name="q" size="8" class="search-query" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
 		</form>
 
 		<div id="menu">
