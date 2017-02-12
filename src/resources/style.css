@@ -392,20 +392,6 @@ table.summary {
 	line-height: 24px;
 }
 
-/* Splitter */
-#splitter {
-	position: fixed;
-	height: 100%;
-	width: 5px;
-	left: 270px;
-	background: #E7E7E7 url('resize.png') left center no-repeat;
-	cursor: e-resize;
-}
-
-#splitter.active {
-	opacity: .5;
-}
-
 /* Footer */
 #footer {
 	border-top: 1px solid #e5e5e5;
