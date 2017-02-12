@@ -97,7 +97,7 @@ $(window).load(function() {
 			});
 
 	// Save natural order
-	$('table.summary tr[data-order]', $content).each(function(index) {
+	$('.summary [data-order]', $content).each(function(index) {
 		do {
 			index = '0' + index;
 		} while (index.length < 3);
@@ -105,8 +105,8 @@ $(window).load(function() {
 	});
 
 	// Switch between natural and alphabetical order
-	var $caption = $('table.summary', $content)
-		.filter(':has(tr[data-order])')
+	var $caption = $('.summary', $content)
+		.filter(':has([data-order])')
 			.prev('h2');
 	$caption
 		.click(function() {
@@ -117,8 +117,8 @@ $(window).load(function() {
 			$.cookie('order', order, {expires: 365});
 			var attr = 'alphabetical' === order ? 'data-order' : 'data-order-natural';
 			$this
-				.next('table')
-					.find('tr').sortElements(function(a, b) {
+				.next('.summary')
+					.find('.element').sortElements(function(a, b) {
 						return $(a).attr(attr) > $(b).attr(attr) ? 1 : -1;
 					});
 			return false;
@@ -131,7 +131,7 @@ $(window).load(function() {
 
 	// Open details
 	if (ApiGen.config.options.elementDetailsCollapsed) {
-		$(document.body).on('click', 'tr', function(ev) {
+		$(document.body).on('click', '.summary .element', function(ev) {
 
 			var short = this.querySelector('.short')
 			, detailed = this.querySelector('.detailed')

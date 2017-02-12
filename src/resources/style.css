@@ -270,16 +270,22 @@ h2.switchable::after {
 	float: right;
 }
 
+.summary .element {
+	position: relative;
+	border-top: 1px solid #ededed;
+	padding-top: 1rem;
+}
+
+.summary .element + .element {
+	margin-top: 1rem;
+}
+
 .summary td hr {
 	margin: 8px -8px;
 }
 
 #packages.summary td:first-child, #namespaces.summary td:first-child, .inherited.summary td:first-child, .used.summary td:first-child {
 	text-align: left;
-}
-
-.summary tr:hover td {
-	background: #f6f6f4;
 }
 
 .summary .description p {
@@ -312,10 +318,6 @@ h2.switchable::after {
 
 .value code {
 	white-space: pre-wrap;
-}
-
-td.name, td.attributes {
-	width: 1%;
 }
 
 .class .methods .name, .class .properties .name, .class .constants .name {
