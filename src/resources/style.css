@@ -270,10 +270,6 @@ h2.switchable::after {
 	float: right;
 }
 
-.summary td:first-child {
-	text-align: right;
-}
-
 .summary td hr {
 	margin: 8px -8px;
 }
