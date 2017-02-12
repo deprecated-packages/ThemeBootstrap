@@ -86,6 +86,14 @@ pre code {
 	position: fixed;
 }
 
+.search-query {
+	width: 100%;
+	box-sizing: border-box;
+	border: 0;
+	border-bottom: 1px solid #ededed;
+	padding: 10px;
+}
+
 /* Menu */
 #menu {
 	padding: 10px;

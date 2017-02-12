@@ -30,15 +30,6 @@
 				<a href="index.html" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
 			</div>
 			<div class="collapse navbar-collapse">
-
-                <form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" class="navbar-form navbar-left" role="search">
-                    <input type="hidden" name="cx" value="{$config->googleCseId}">
-                    <input type="hidden" name="ie" value="UTF-8">
-                    <div class="form-group">
-                        <input type="text" name="q" class="search-query form-control" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
-					</div>
-				</form>
-
 				<ul class="nav navbar-nav">
 					<li n:class="'package' === $active ? active" n:if="$packages">
 						<a n:tag-if="'package' !== $active && $package" href="{$package|packageUrl}" title="Summary of {$package}"><span>Package</span></a>
@@ -84,9 +75,7 @@
 		<form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" role="search">
 			<input type="hidden" name="cx" value="{$config->googleCseId}">
 			<input type="hidden" name="ie" value="UTF-8">
-			<div class="form-group">
-				<input type="text" name="q" class="search-query form-control" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
-			</div>
+			<input type="text" name="q" class="search-query" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
 		</form>
 
 		<div id="menu">
