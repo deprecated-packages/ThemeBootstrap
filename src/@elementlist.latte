@@ -6,55 +6,43 @@
 {/define}
 
 {if $classes}
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>Classes summary</h2></div>
-	<table class="summary table table-bordered table-striped" id="classes">
-	{include elements, elements => $classes}
-	</table>
-</div>
+<h2>Classes summary</h2>
+<table class="summary" id="classes">
+{include elements, elements => $classes}
+</table>
 {/if}
 
 {if $interfaces}
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>Interfaces summary</h2></div>
-	<table class="summary table table-bordered table-striped" id="interfaces">
-	{include elements, elements => $interfaces}
-	</table>
-</div>
+<h2>Interfaces summary</h2>
+<table class="summary" id="interfaces">
+{include elements, elements => $interfaces}
+</table>
 {/if}
 
 {if $traits}
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>Traits summary</h2></div>
-	<table class="summary table table-bordered table-striped" id="traits">
-	{include elements, elements => $traits}
-	</table>
-</div>
+<h2>Traits summary</h2>
+<table class="summary" id="traits">
+{include elements, elements => $traits}
+</table>
 {/if}
 
 {if $exceptions}
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>Exceptions summary</h2></div>
-	<table class="summary table table-bordered table-striped" id="exceptions">
-	{include elements, elements => $exceptions}
-	</table>
-</div>
+<h2>Exceptions summary</h2>
+<table class="summary" id="exceptions">
+{include elements, elements => $exceptions}
+</table>
 {/if}
 
 {if $constants}
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>Constants summary</h2></div>
-	<table class="summary table table-bordered table-striped" id="constants">
-	{include elements, elements => $constants}
-	</table>
-</div>
+<h2>Constants summary</h2>
+<table class="summary" id="constants">
+{include elements, elements => $constants}
+</table>
 {/if}
 
 {if $functions}
-<div class="panel panel-default">
-    <div class="panel-heading"><h2>Functions summary</h2></div>
-	<table class="summary table table-bordered table-striped" id="functions">
-	{include elements, elements => $functions}
-	</table>
-</div>
+<h2>Functions summary</h2>
+<table class="summary" id="functions">
+{include elements, elements => $functions}
+</table>
 {/if}

@@ -1,11 +1,97 @@
+!function () {
+    "use strict";
+
+    function forEach(nodeList, callback)
+    {
+        Array.prototype.forEach.call(nodeList, callback)
+    }
+
+    function adjustSidebarOverflowing() {
+        var sidebar = document.body.querySelector('.sidebar')
+
+        if (!sidebar)
+        {
+            return
+        }
+
+        sidebar.classList.add('computing')
+
+        var menu = sidebar.querySelector('#menu')
+        var max = 0
+
+        forEach(menu.querySelectorAll('*'), function (el) {
+
+            max = Math.max(max, el.scrollWidth)
+
+        })
+
+        var method = max > menu.clientWidth ? 'add' : 'remove'
+
+        sidebar.classList[method]('overflowing')
+        sidebar.classList.remove('computing')
+    }
+
+    function indexAssets()
+    {
+        var assets = {}
+
+        forEach(document.querySelectorAll('[data-asset]'), function (asset) {
+
+            assets[asset.getAttribute('data-asset')] = asset
+
+        })
+
+        return assets
+    }
+
+    function attachAnchors(icon)
+    {
+        forEach(document.querySelectorAll('a.anchor'), function (anchor) {
+
+            anchor.appendChild(icon.cloneNode(true))
+
+        })
+    }
+
+    function markDetailedElements()
+    {
+	    forEach(document.body.querySelectorAll('.element .description.detailed.hidden'), function (detailed) {
+
+	    	var element = detailed.closest('.element')
+			var short = element.querySelector('.description.short')
+
+		    if (short.textContent.trim() == detailed.textContent.trim())
+		    {
+		    	return
+		    }
+
+		    element.classList.add('expandable')
+
+	    })
+    }
+
+    jQuery(document).ready(function ($) {
+
+        var assets = indexAssets()
+
+        adjustSidebarOverflowing()
+        attachAnchors(assets['icon-anchor'])
+
+	    if (ApiGen.config.options.elementDetailsCollapsed) {
+		    markDetailedElements()
+
+		    $(document.body).on('click', '.element.expandable', function () {
+
+		    	this.classList.toggle('expanded')
+
+		    })
+	    }
+
+    })
+} ()
+
 $(window).load(function() {
-	var $document = $(document);
-	var $navigation = $('#navigation');
-	var navigationHeight = $navigation.height();
-	var $left = $('#left');
 	var $right = $('#right');
-	var $rightInner = $('#rightInner');
-	var $splitter = $('#splitter');
 	var $groups = $('#groups');
 	var $content = $('#content');
 
@@ -46,9 +132,7 @@ $(window).load(function() {
 	$search
 		.autocomplete(ApiGen.elements, {
 			matchContains: true,
-			scrollHeight: 200,
 			max: 20,
-			width: 300,
 			noRecord: '',
 			highlight: function(value, term) {
 				var term = term.toUpperCase().replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1").replace(/[A-Z0-9]/g, function(m, offset) {
@@ -64,14 +148,6 @@ $(window).load(function() {
 			},
 			formatResult: function(data) {
 				return data[1];
-			},
-			show: function($list) {
-				var $items = $('li span', $list);
-				var maxWidth = Math.max.apply(null, $items.map(function() {
-					return $(this).width();
-				}));
-				// 10px padding
-				$list.width(Math.max(maxWidth + 10, $search.innerWidth()));
 			}
 		}).result(function(event, data) {
 			autocompleteFound = true;
@@ -97,7 +173,7 @@ $(window).load(function() {
 			});
 
 	// Save natural order
-	$('table.summary tr[data-order]', $content).each(function(index) {
+	$('.summary [data-order]', $content).each(function(index) {
 		do {
 			index = '0' + index;
 		} while (index.length < 3);
@@ -105,8 +181,8 @@ $(window).load(function() {
 	});
 
 	// Switch between natural and alphabetical order
-	var $caption = $('table.summary', $content)
-		.filter(':has(tr[data-order])')
+	var $caption = $('.summary', $content)
+		.filter(':has([data-order])')
 			.prev('h2');
 	$caption
 		.click(function() {
@@ -117,8 +193,8 @@ $(window).load(function() {
 			$.cookie('order', order, {expires: 365});
 			var attr = 'alphabetical' === order ? 'data-order' : 'data-order-natural';
 			$this
-				.next('table')
-					.find('tr').sortElements(function(a, b) {
+				.next('.summary')
+					.find('.element').sortElements(function(a, b) {
 						return $(a).attr(attr) > $(b).attr(attr) ? 1 : -1;
 					});
 			return false;
@@ -128,96 +204,6 @@ $(window).load(function() {
 	if ((null === $.cookie('order') && 'alphabetical' === ApiGen.config.options.elementsOrder) || 'alphabetical' === $.cookie('order')) {
 		$caption.click();
 	}
-
-	// Open details
-	if (ApiGen.config.options.elementDetailsCollapsed) {
-		$(document.body).on('click', 'tr', function(ev) {
-
-			var short = this.querySelector('.short')
-			, detailed = this.querySelector('.detailed')
-
-			if (!short || !detailed) return
-
-			$(short).toggleClass('hidden')
-			$(detailed).toggleClass('hidden')
-
-		})
-	}
-
-	// Splitter
-	var splitterWidth = $splitter.width();
-	var splitterPosition = $.cookie('splitter') ? parseInt($.cookie('splitter')) : null;
-	var splitterPositionBackup = $.cookie('splitterBackup') ? parseInt($.cookie('splitterBackup')) : null;
-	function setSplitterPosition(position)
-	{
-		splitterPosition = position;
-
-		$left.width(position);
-		$right.css('margin-left', position + splitterWidth);
-		$splitter.css('left', position);
-	}
-	function setNavigationPosition()
-	{
-		var height = $(window).height() - navigationHeight;
-		$left.height(height);
-		$splitter.height(height);
-		$right.height(height);
-	}
-	function setContentWidth()
-	{
-		var width = $rightInner.width();
-		$rightInner
-			.toggleClass('medium', width <= 960)
-			.toggleClass('small', width <= 650);
-	}
-	$splitter.mousedown(function() {
-			$splitter.addClass('active');
-
-			$document.mousemove(function(event) {
-				if (event.pageX >= 230 && $document.width() - event.pageX >= 600 + splitterWidth) {
-					setSplitterPosition(event.pageX);
-					setContentWidth();
-				}
-			});
-
-			$()
-				.add($splitter)
-				.add($document)
-					.mouseup(function() {
-						$splitter
-							.removeClass('active')
-							.unbind('mouseup');
-						$document
-							.unbind('mousemove')
-							.unbind('mouseup');
-
-						$.cookie('splitter', splitterPosition, {expires: 365});
-					});
-
-			return false;
-		});
-	$splitter.dblclick(function() {
-		if (splitterPosition) {
-			splitterPositionBackup = $left.width();
-			setSplitterPosition(0);
-		} else {
-			setSplitterPosition(splitterPositionBackup);
-			splitterPositionBackup = null;
-		}
-
-		setContentWidth();
-
-		$.cookie('splitter', splitterPosition, {expires: 365});
-		$.cookie('splitterBackup', splitterPositionBackup, {expires: 365});
-	});
-	if (null !== splitterPosition) {
-		setSplitterPosition(splitterPosition);
-	}
-	setNavigationPosition();
-	setContentWidth();
-	$(window)
-		.resize(setNavigationPosition)
-		.resize(setContentWidth);
 
 	// Select selected lines
 	var matches = window.location.hash.substr(1).match(/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/);

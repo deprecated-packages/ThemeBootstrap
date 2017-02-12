@@ -8,7 +8,7 @@
 
 	<title>{include title}{if 'overview' !== $active && $config->title} | {$config->title}{/if}</title>
 
-	<link rel="stylesheet" href="{='resources/bootstrap.min.css'|staticFile}">
+	<link rel="stylesheet" href="{='resources/bootstrap.css'|staticFile}">
 	<link rel="stylesheet" href="{='resources/style.css'|staticFile}">
 	<link n:if="$config->googleCseId" rel="search" type="application/opensearchdescription+xml" title="{$config->title}" href="{$config->baseUrl}/opensearch.xml">
 
@@ -24,64 +24,59 @@
 </head>
 
 <body>
-	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
-			</div>
-			<div class="collapse navbar-collapse">
+	<nav class="navbar">
+        <div class="navbar-header">
+            <a href="index.html" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li n:class="'package' === $active ? active" n:if="$packages">
+                    <a n:tag-if="'package' !== $active && $package" href="{$package|packageUrl}" title="Summary of {$package}"><span>Package</span></a>
+                </li>
+                <li n:class="'namespace' === $active ? active" n:if="$namespaces">
+                    <a n:tag-if="'namespace' !== $active && $namespace" href="{$namespace|namespaceUrl}" title="Summary of {$namespace}"><span>Namespace</span></a>
+                </li>
+                <li n:class="'class' === $active ? active" n:if="!$function && !$constant">
+                    <a n:tag-if="'class' !== $active && $class" href="{$class|classUrl}" title="Summary of {$class->name}"><span>Class</span></a>
+                </li>
+                <li n:class="'function' === $active ? active" n:if="$function">
+                    <a n:tag-if="'function' !== $active" href="{$function|functionUrl}" title="Summary of {$function->name}"><span>Function</span></a>
+                </li>
+                <li n:class="'constant' === $active ? active" n:if="$constant">
+                    <a n:tag-if="'constant' !== $active" href="{$constant|constantUrl}" title="Summary of {$constant->name}"><span>Constant</span></a>
+                </li>
 
-                <form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" class="navbar-form navbar-left" role="search">
-                    <input type="hidden" name="cx" value="{$config->googleCseId}">
-                    <input type="hidden" name="ie" value="UTF-8">
-                    <div class="form-group">
-                        <input type="text" name="q" class="search-query form-control" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
-					</div>
-				</form>
+                <li class="divider-vertical" n:if="$config->tree || $config->deprecated || $config->todo"></li>
 
-				<ul class="nav navbar-nav">
-					<li n:class="'package' === $active ? active" n:if="$packages">
-						<a n:tag-if="'package' !== $active && $package" href="{$package|packageUrl}" title="Summary of {$package}"><span>Package</span></a>
-					</li>
-					<li n:class="'namespace' === $active ? active" n:if="$namespaces">
-						<a n:tag-if="'namespace' !== $active && $namespace" href="{$namespace|namespaceUrl}" title="Summary of {$namespace}"><span>Namespace</span></a>
-					</li>
-					<li n:class="'class' === $active ? active" n:if="!$function && !$constant">
-						<a n:tag-if="'class' !== $active && $class" href="{$class|classUrl}" title="Summary of {$class->name}"><span>Class</span></a>
-					</li>
-					<li n:class="'function' === $active ? active" n:if="$function">
-						<a n:tag-if="'function' !== $active" href="{$function|functionUrl}" title="Summary of {$function->name}"><span>Function</span></a>
-					</li>
-					<li n:class="'constant' === $active ? active" n:if="$constant">
-						<a n:tag-if="'constant' !== $active" href="{$constant|constantUrl}" title="Summary of {$constant->name}"><span>Constant</span></a>
-					</li>
+                <li n:class="'tree' === $active ? active" n:if="$config->tree">
+                    <a n:tag-if="'tree' !== $active" href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+                </li>
 
-					<li class="divider-vertical" n:if="$config->tree || $config->deprecated || $config->todo"></li>
+                {foreach $annotationGroups as $annotation}
+                    <li n:class="$active === 'annotation-group-' . $annotation ? active">
+                        <a n:tag-if="$active !== 'annotation-group-' . $annotation" href="annotation-group-{$annotation}.html" title="List of elements with {$annotation} annotation">
+                            <span>{$annotation|firstUpper}</span>
+                        </a>
+                    </li>
+                {/foreach}
 
-					<li n:class="'tree' === $active ? active" n:if="$config->tree">
-						<a n:tag-if="'tree' !== $active" href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-					</li>
+                <li class="divider-vertical" n:if="$config->download"></li>
 
-					{foreach $annotationGroups as $annotation}
-						<li n:class="$active === 'annotation-group-' . $annotation ? active">
-							<a n:tag-if="$active !== 'annotation-group-' . $annotation" href="annotation-group-{$annotation}.html" title="List of elements with {$annotation} annotation">
-								<span>{$annotation|firstUpper}</span>
-							</a>
-						</li>
-					{/foreach}
-
-					<li class="divider-vertical" n:if="$config->download"></li>
-
-					<li n:if="$config->download">
-						<a href="{$archive}" title="Download documentation as ZIP archive"><span>Download</span></a>
-					</li>
-				</ul>
-			</div>
-		</div>
+                <li n:if="$config->download">
+                    <a href="{$archive}" title="Download documentation as ZIP archive"><span>Download</span></a>
+                </li>
+            </ul>
+        </div>
 	</nav>
 
-	<div id="left">
-	<div id="menu">
+	<aside class="sidebar">
+		<form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" role="search">
+			<input type="hidden" name="cx" value="{$config->googleCseId}">
+			<input type="hidden" name="ie" value="UTF-8">
+			<input type="text" name="q" size="8" class="search-query" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
+		</form>
+
+		<div id="menu">
 		{define group}
 			<ul>
 				{foreach $groups as $group}
@@ -104,10 +99,10 @@
 
 		<div id="groups">
 			{if $namespaces}
-				<h3>Namespaces</h3>
+				<strong>Namespaces</strong>
 				{include group, groups => $namespaces, actualGroup => $namespace, groupBy => 'namespace'}
 			{elseif $packages}
-				<h3>Packages</h3>
+				<strong>Packages</strong>
 				{include group, groups => $packages, actualGroup => $package, groupBy => 'package'}
 			{/if}
 		</div>
@@ -120,49 +115,56 @@
 
 		<div id="elements">
 			{if $classes}
-			<h3>Classes</h3>
+			<strong>Classes</strong>
 			{include elements, elements => $classes, activeElement => $class}
 			{/if}
 
 			{if $interfaces}
-			<h3>Interfaces</h3>
+			<strong>Interfaces</strong>
 			{include elements, elements => $interfaces, activeElement => $class}
 			{/if}
 
 			{if $traits}
-			<h3>Traits</h3>
+			<strong>Traits</strong>
 			{include elements, elements => $traits, activeElement => $class}
 			{/if}
 
 			{if $exceptions}
-			<h3>Exceptions</h3>
+			<strong>Exceptions</strong>
 			{include elements, elements => $exceptions, activeElement => $class}
 			{/if}
 
 			{if $constants}
-			<h3>Constants</h3>
+			<strong>Constants</strong>
 			{include elements, elements => $constants, activeElement => $constant}
 			{/if}
 
 			{if $functions}
-			<h3>Functions</h3>
+			<strong>Functions</strong>
 			{include elements, elements => $functions, activeElement => $function}
 			{/if}
 		</div>
 	</div>
-</div>
-
-<div id="splitter"></div>
+</aside>
 
 <div id="right">
 	<div id="rightInner">
 	{include content}
 	</div>
 
-	<div id="footer">
+	<footer>
 		{$config->title} API documentation generated by <a href="http://apigen.org">ApiGen</a>
-	</div>
+	</footer>
 </div>
+
+    <div id="assets" aria-hidden="true">
+
+        <svg data-asset="icon-anchor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M 4 9 L 5 9 L 5 10 L 4 10 C 2.5 10 1 8.31 1 6.5 C 1 4.69 2.55 3 4 3 L 6.442 3 L 8 3 C 9.45 3 11 4.69 11 6.5 C 11 7.91 10.09 9.22 9 9.75 L 9 8.59 C 9.58 8.14 10 7.32 10 6.5 C 10 5.22 8.98 4 8 4 L 4 4 C 3.02 4 2 5.22 2 6.5 C 2 7.78 3 9 4 9 Z M 13 6 L 12 6 L 12 7 L 12.679 7 L 13 7 C 14 7 15 8.22 15 9.5 C 15 10.78 13.98 12 13 12 L 9 12 C 8.02 12 7 10.78 7 9.5 C 7 8.67 7.42 7.86 8 7.41 L 8 6.25 C 6.91 6.78 6 8.09 6 9.5 C 6 11.31 7.55 13 9 13 L 13 13 C 14.45 13 16 11.31 16 9.5 C 16 7.69 14.5 6 13 6 Z"></path>
+        </svg>
+
+    </div>
+
 <script src="{='resources/combined.js'|staticFile}"></script>
 <script src="{='elementlist.js'|staticFile}"></script>
 </body>
