@@ -78,7 +78,7 @@ pre code {
 
 .sidebar {
 	position: fixed;
-	height: 100%;
+	height: calc(100vh - 51px); /* 51px is navigation */
 	width: 270px;
     min-width: 270px;
 	border-right: 1px solid #ededed;
@@ -230,13 +230,12 @@ pre code {
 
 /* Right side */
 #right {
-	overflow: auto;
 	margin-left: 270px;
-	height: 100%;
 }
 
 #rightInner {
 	min-width: 350px;
+	min-height: calc(100vh - 180px); /* 180px is ~ navigation + footer */
 }
 
 /* Navigation */
