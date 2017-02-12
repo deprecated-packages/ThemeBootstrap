@@ -44,9 +44,7 @@ $(window).load(function() {
 	$search
 		.autocomplete(ApiGen.elements, {
 			matchContains: true,
-			scrollHeight: 200,
 			max: 20,
-			width: 300,
 			noRecord: '',
 			highlight: function(value, term) {
 				var term = term.toUpperCase().replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1").replace(/[A-Z0-9]/g, function(m, offset) {
@@ -62,14 +60,6 @@ $(window).load(function() {
 			},
 			formatResult: function(data) {
 				return data[1];
-			},
-			show: function($list) {
-				var $items = $('li span', $list);
-				var maxWidth = Math.max.apply(null, $items.map(function() {
-					return $(this).width();
-				}));
-				// 10px padding
-				$list.width(Math.max(maxWidth + 10, $search.innerWidth()));
 			}
 		}).result(function(event, data) {
 			autocompleteFound = true;

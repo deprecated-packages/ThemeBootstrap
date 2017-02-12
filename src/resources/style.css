@@ -84,6 +84,7 @@ pre code {
 	width: 270px;
 	height: 100%;
 	position: fixed;
+	border-right: 1px solid #ededed;
 }
 
 .search-query {
@@ -174,46 +175,40 @@ pre code {
 
 /* Autocomplete */
 .ac_results {
-	border-radius: 4px;
-	margin-top: 2px;
-	background-color: #fff;
-	border: 1px solid #E7E7E7;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	overflow: hidden;
+	position: fixed;
+	top: 0;
+	left: 269px;
+	right: 0;
+	bottom: 0;
+	background: white;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border-left: 1px solid #ededed;
 	z-index: 99999;
 }
 
 .ac_results ul {
 	display: block;
 	list-style: none;
-	padding: 0;
+	padding: 15px 15px;
 	margin: 0;
 }
 
 .ac_results li {
 	margin: 0;
-	padding: 0 5px;
-	line-height: 2;
-	cursor: default;
+	padding: 0 15px;
+	cursor: auto;
 	display: block;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	line-height: 2;
 }
 
-.ac_results li strong {
-	color: #000;
+.ac_results .ac_over {
+	background: rgba(0, 140, 255, .2);
+	cursor: pointer;
 }
-
-.ac_over {
-	background-color: #0088cc;
-	color: #fff;
-}
-
-.ac_results li.ac_over strong {
-	color: #fff;
-}
-
 
 /* Right side */
 #right {
