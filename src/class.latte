@@ -5,7 +5,7 @@
 
 {block content}
 <div id="content" class="class">
-	<h1 n:class="$class->deprecated ? deprecated">{if $class->interface}Interface{elseif $class->trait}Trait{else}Class{/if} {$class->shortName}</h1>
+	<h1 n:class="$class->deprecated ? deprecated"><span class="type">{if $class->interface}Interface{elseif $class->trait}Trait{else}Class{/if}</span> {$class->shortName}</h1>
 
 	{if $class->valid}
 
