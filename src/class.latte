@@ -104,7 +104,7 @@
 		{define method}
 		<div data-order="{$method->name}" id="{if $method->magic}m{/if}_{$method->name}" n:class="element">
 			{var $annotations = $method->annotations}
-			<a class="anchor" href="#{if $method->magic}m{/if}_{$method->name}">#</a>
+			<a class="anchor" href="#{if $method->magic}m{/if}_{$method->name}"></a>
 			<code class="signature">
 				<span class="attributes">
 				{if !$class->interface && $method->abstract}abstract{elseif $method->final}final{/if} {if $method->protected}protected{elseif $method->private}private{else}public{/if} {if $method->static}static{/if}
@@ -264,7 +264,7 @@
 		<h2>Constants summary</h2>
 		<div class="summary constants" id="constants" n:if="$ownConstants">
 		<div n:foreach="$ownConstants as $constant" data-order="{$constant->name}" id="{$constant->name}" n:class="element">
-			<a href="#{$constant->name}" class="anchor">#</a>
+			<a href="#{$constant->name}" class="anchor"></a>
 			{var $annotations = $constant->annotations}
 
 			<code class="signature">
@@ -322,7 +322,7 @@
 	{if $ownProperties || $inheritedProperties || $usedProperties || $ownMagicProperties || $inheritedMagicProperties || $usedMagicProperties}
 		{define property}
 		<div data-order="{$property->name}" id="{if $property->magic}m{/if}${$property->name}" n:class="element">
-			<a href="#{if $property->magic}m{/if}${$property->name}" class="anchor">#</a>
+			<a href="#{if $property->magic}m{/if}${$property->name}" class="anchor"></a>
 			<code class="signature">
 				<span class="attributes">
 				{if $property->protected}protected{elseif $property->private}private{else}public{/if} {if $property->static}static{/if} {if $property->readOnly}read-only{elseif $property->writeOnly}write-only{/if}

@@ -1,33 +1,67 @@
-jQuery(document).ready(function () {
+!function () {
+    "use strict";
 
-	function adjustSidebarOverflowing() {
-		var sidebar = document.body.querySelector('.sidebar')
+    function forEach(nodeList, callback)
+    {
+        Array.prototype.forEach.call(nodeList, callback)
+    }
 
-		if (!sidebar)
-		{
-			return
-		}
+    function adjustSidebarOverflowing() {
+        var sidebar = document.body.querySelector('.sidebar')
 
-		sidebar.classList.add('computing')
+        if (!sidebar)
+        {
+            return
+        }
 
-		var menu = sidebar.querySelector('#menu')
-		var max = 0
+        sidebar.classList.add('computing')
 
-		Array.prototype.forEach.call(menu.querySelectorAll('*'), function (el) {
+        var menu = sidebar.querySelector('#menu')
+        var max = 0
 
-			max = Math.max(max, el.scrollWidth)
+        forEach(menu.querySelectorAll('*'), function (el) {
 
-		})
+            max = Math.max(max, el.scrollWidth)
 
-		var method = max > menu.clientWidth ? 'add' : 'remove'
+        })
 
-		sidebar.classList[method]('overflowing')
-		sidebar.classList.remove('computing')
-	}
+        var method = max > menu.clientWidth ? 'add' : 'remove'
 
-	adjustSidebarOverflowing()
+        sidebar.classList[method]('overflowing')
+        sidebar.classList.remove('computing')
+    }
 
-})
+    function indexAssets()
+    {
+        var assets = {}
+
+        forEach(document.querySelectorAll('[data-asset]'), function (asset) {
+
+            assets[asset.getAttribute('data-asset')] = asset
+
+        })
+
+        return assets
+    }
+
+    function attachAnchors(icon)
+    {
+        forEach(document.querySelectorAll('a.anchor'), function (anchor) {
+
+            anchor.appendChild(icon.cloneNode(true))
+
+        })
+    }
+
+    jQuery(document).ready(function () {
+
+        var assets = indexAssets()
+
+        adjustSidebarOverflowing()
+        attachAnchors(assets['icon-anchor'])
+
+    })
+} ()
 
 $(window).load(function() {
 	var $right = $('#right');

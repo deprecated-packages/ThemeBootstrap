@@ -231,11 +231,8 @@ pre code {
 /* Right side */
 #right {
 	overflow: auto;
-	margin-left: 275px;
+	margin-left: 270px;
 	height: 100%;
-	position: relative;
-	left: 0;
-	right: 0;
 }
 
 #rightInner {
@@ -289,7 +286,7 @@ pre code {
 /* Content */
 #content {
 	clear: both;
-	padding: 5px 15px;
+	padding: 5px 20px;
 }
 
 #content > .description {
@@ -424,13 +421,24 @@ table.summary {
 }
 
 .anchor {
-	position: absolute;
-	top: 0;
-	right: 0;
-	line-height: 1;
-	font-size: 85%;
-	margin: 0;
-	color: #0088cc !important;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    position: absolute;
+    width: 20px; /* gutter size */
+}
+
+:not(:hover) > .anchor {
+    opacity: 0;
+}
+
+.anchor svg {
+    width: 20px; /* gutter size */
+    height: auto;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -10px;
 }
 
 .list {
@@ -583,4 +591,8 @@ span.l a.l:hover, span.l a.l:active, span.l a.l:focus {
 }
 .right, .summary td.right {
 	text-align: right;
+}
+
+[aria-hidden] {
+    display: none;
 }
