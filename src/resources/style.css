@@ -174,7 +174,7 @@ pre code {
 }
 
 /* Autocomplete */
-.ac_results {
+.search-suggestion {
 	position: fixed;
 	top: 0;
 	left: 269px;
@@ -187,14 +187,14 @@ pre code {
 	z-index: 99999;
 }
 
-.ac_results ul {
+.search-suggestion ul {
 	display: block;
 	list-style: none;
 	padding: 15px 15px;
 	margin: 0;
 }
 
-.ac_results li {
+.search-suggestion li {
 	margin: 0;
 	padding: 0 15px;
 	cursor: auto;
@@ -205,7 +205,7 @@ pre code {
 	line-height: 2;
 }
 
-.ac_results .ac_over {
+.search-suggestion .search-suggestion-highlight {
 	background: rgba(0, 140, 255, .2);
 	cursor: pointer;
 }

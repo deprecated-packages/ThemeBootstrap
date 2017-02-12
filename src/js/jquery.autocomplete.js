@@ -432,7 +432,7 @@ $.Autocompleter = function(input, options) {
 
 $.Autocompleter.defaults = {
 	inputClass: "ac_input",
-	resultsClass: "ac_results",
+	resultsClass: "search-suggestion",
 	loadingClass: "ac_loading",
 	minChars: 1,
 	delay: 400,
@@ -596,7 +596,7 @@ $.Autocompleter.Cache = function(options) {
 
 $.Autocompleter.Select = function (options, input, select, config) {
 	var CLASSES = {
-		ACTIVE: "ac_over"
+		ACTIVE: "search-suggestion-highlight"
 	};
 
 	var listItems,
