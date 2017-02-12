@@ -316,6 +316,10 @@ h2.switchable::after {
 	white-space: nowrap;
 }
 
+.signature .attributes {
+	float: right;
+}
+
 .value code {
 	white-space: pre-wrap;
 }
