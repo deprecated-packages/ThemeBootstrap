@@ -53,12 +53,39 @@
         })
     }
 
-    jQuery(document).ready(function () {
+    function markDetailedElements()
+    {
+	    forEach(document.body.querySelectorAll('.element .description.detailed.hidden'), function (detailed) {
+
+	    	var element = detailed.closest('.element')
+			var short = element.querySelector('.description.short')
+
+		    if (short.textContent.trim() == detailed.textContent.trim())
+		    {
+		    	return
+		    }
+
+		    element.classList.add('expandable')
+
+	    })
+    }
+
+    jQuery(document).ready(function ($) {
 
         var assets = indexAssets()
 
         adjustSidebarOverflowing()
         attachAnchors(assets['icon-anchor'])
+
+	    if (ApiGen.config.options.elementDetailsCollapsed) {
+		    markDetailedElements()
+
+		    $(document.body).on('click', '.element.expandable', function () {
+
+		    	this.classList.toggle('expanded')
+
+		    })
+	    }
 
     })
 } ()
@@ -176,21 +203,6 @@ $(window).load(function() {
 		.attr('title', 'Switch between natural and alphabetical order');
 	if ((null === $.cookie('order') && 'alphabetical' === ApiGen.config.options.elementsOrder) || 'alphabetical' === $.cookie('order')) {
 		$caption.click();
-	}
-
-	// Open details
-	if (ApiGen.config.options.elementDetailsCollapsed) {
-		$(document.body).on('click', '.summary .element', function(ev) {
-
-			var short = this.querySelector('.short')
-			, detailed = this.querySelector('.detailed')
-
-			if (!short || !detailed) return
-
-			$(short).toggleClass('hidden')
-			$(detailed).toggleClass('hidden')
-
-		})
 	}
 
 	// Select selected lines

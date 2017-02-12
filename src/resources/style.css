@@ -344,6 +344,23 @@ table.summary {
 	padding-top: 1rem;
 }
 
+.summary .element.expandable {
+	cursor: zoom-in;
+}
+
+.summary .element.expanded {
+	cursor: zoom-out;
+}
+
+.summary .element.expanded .short {
+	display: none !important;
+}
+
+.summary .element.expanded .detailed {
+	display: block !important;
+	visibility: visible !important;
+}
+
 .summary td,
 .summary .element {
 	border-top: 1px solid #ededed;
