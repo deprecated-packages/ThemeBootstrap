@@ -74,8 +74,9 @@ pre code {
 	display: none;
 }
 
-/* Left side */
-#left {
+/* sidebar */
+
+.sidebar {
 	overflow: auto;
 	width: 270px;
 	height: 100%;

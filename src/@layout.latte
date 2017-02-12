@@ -69,7 +69,7 @@
         </div>
 	</nav>
 
-	<div id="left">
+	<aside class="sidebar">
 		<form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" role="search">
 			<input type="hidden" name="cx" value="{$config->googleCseId}">
 			<input type="hidden" name="ie" value="UTF-8">
@@ -145,7 +145,7 @@
 			{/if}
 		</div>
 	</div>
-</div>
+</aside>
 
 <div id="right">
 	<div id="rightInner">
