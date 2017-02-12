@@ -262,8 +262,12 @@ dl.tree dd {
 }
 
 h2.switchable {
-	background: transparent url('sort.png') no-repeat center right;
 	cursor: pointer;
+}
+
+h2.switchable::after {
+	content: "\2B0D";
+	float: right;
 }
 
 .summary td:first-child {
