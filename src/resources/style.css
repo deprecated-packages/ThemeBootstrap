@@ -23,16 +23,6 @@ h4 {
 	padding: 0;
 }
 
-.panel-heading h2,
-.panel-heading h3 {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-.panel > p {
-	margin: 10px;
-}
-
 ul, ol {
 	margin-bottom: 0;
 }
