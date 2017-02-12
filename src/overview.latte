@@ -11,7 +11,7 @@
 
 	{if count($namespaces)}
 		<h2>Namespaces summary</h2>
-		<table class="summary table table-bordered table-striped" id="namespaces">
+		<table class="summary" id="namespaces">
 			{foreach $namespaces as $namespace}
 				{continueIf $config->main && 0 !== strpos($namespace, $config->main)}
 				<tr>
@@ -24,7 +24,7 @@
 
 	{if count($packages)}
 		<h2>Packages summary</h2>
-		<table class="summary table table-bordered table-striped" id="packages">
+		<table class="summary" id="packages">
 			{foreach $packages as $package}
 				{continueIf $config->main && 0 !== strpos($package, $config->main)}
 				<tr>

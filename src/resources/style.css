@@ -270,10 +270,32 @@ h2.switchable::after {
 	float: right;
 }
 
+table.summary {
+	width: 100%;
+}
+
+.summary td {
+	vertical-align: top;
+	padding: .2rem .4rem;
+}
+
+.summary td:first-child {
+	padding-left: 0;
+	width: 25%;
+}
+
+.summary td:last-child {
+	padding-right: 0;
+}
+
 .summary .element {
 	position: relative;
-	border-top: 1px solid #ededed;
 	padding-top: 1rem;
+}
+
+.summary td,
+.summary .element {
+	border-top: 1px solid #ededed;
 }
 
 .summary .element + .element {

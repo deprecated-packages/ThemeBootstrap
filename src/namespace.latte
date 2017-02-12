@@ -9,7 +9,7 @@
 
 	{if $subnamespaces}
 	<h2>Namespaces summary</h2>
-	<table class="summary table table-bordered table-striped" id="namespaces">
+	<table class="summary" id="namespaces">
 	<tr n:foreach="$subnamespaces as $namespace">
 		<td class="name"><a href="{$namespace|namespaceUrl}">{$namespace}</a></td>
 	</tr>
