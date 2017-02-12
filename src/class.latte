@@ -298,9 +298,7 @@
 				{/foreach}
 			</div>
 
-			<code class="value">
-				{$constant->valueDefinition|highlightValue:$class|noescape}
-			</code>
+			<pre class="value">{$constant->valueDefinition|highlightValue:$class|noescape}</pre>
 		</div>
 		</div>
 
@@ -360,9 +358,7 @@
 				{/foreach}
 			</div>
 
-			<code n:if="!$property->magic" class="value">
-				{$property->defaultValueDefinition|highlightValue:$class|noescape}
-			</code>
+			<pre n:if="!$property->magic" class="value">{$property->defaultValueDefinition|highlightValue:$class|noescape}</pre>
 		</div>
 		{/define}
 

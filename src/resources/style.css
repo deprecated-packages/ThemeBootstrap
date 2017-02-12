@@ -35,6 +35,10 @@ a, a:hover {
 	text-decoration: none;
 }
 
+pre:empty {
+    display: none;
+}
+
 var {
 	font-weight: bold;
 	font-style: normal;
@@ -342,12 +346,12 @@ table.summary {
 	white-space: nowrap;
 }
 
-.signature .attributes {
-	float: right;
+.signature {
+    white-space: normal;
 }
 
-.value code {
-	white-space: pre-wrap;
+.signature .attributes {
+	float: right;
 }
 
 .class .methods .name, .class .properties .name, .class .constants .name {
