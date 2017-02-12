@@ -111,6 +111,8 @@ pre code {
 	border: 0;
 	border-bottom: 1px solid #ededed;
 	padding: 15px 10px;
+	font-family: inherit;
+	font-size: inherit;
 }
 
 /* Menu */
@@ -245,6 +247,7 @@ pre code {
     position: inherit;
     border: 0;
     border-radius: 0;
+	background: #F8F8F8;
 }
 
 .navbar-header {
@@ -267,6 +270,7 @@ pre code {
 .navbar-nav {
     background: #f8f8f8;
     border-bottom: 1px solid #e7e7e7;
+	overflow: hidden;
 }
 
 .navbar .nav > li > span {

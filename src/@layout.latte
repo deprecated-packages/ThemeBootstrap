@@ -8,7 +8,7 @@
 
 	<title>{include title}{if 'overview' !== $active && $config->title} | {$config->title}{/if}</title>
 
-	<link rel="stylesheet" href="{='resources/bootstrap.min.css'|staticFile}">
+	<link rel="stylesheet" href="{='resources/bootstrap.css'|staticFile}">
 	<link rel="stylesheet" href="{='resources/style.css'|staticFile}">
 	<link n:if="$config->googleCseId" rel="search" type="application/opensearchdescription+xml" title="{$config->title}" href="{$config->baseUrl}/opensearch.xml">
 
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<nav id="navigation" class="navbar">
+	<nav class="navbar">
         <div class="navbar-header">
             <a href="index.html" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
         </div>
