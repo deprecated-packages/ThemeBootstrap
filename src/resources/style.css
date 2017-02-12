@@ -463,14 +463,13 @@ table.summary {
 	line-height: 24px;
 }
 
-/* Footer */
-#footer {
+footer {
 	border-top: 1px solid #e5e5e5;
 	clear: both;
 	color: #808080;
 	text-align: right;
-	padding: 2em 1em;
-	margin: 3em 0 40px 0;
+	padding: 1em;
+	margin: 3em 0 0 0;
 }
 
 /* Tree */
