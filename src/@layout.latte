@@ -25,50 +25,48 @@
 
 <body>
 	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
-			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li n:class="'package' === $active ? active" n:if="$packages">
-						<a n:tag-if="'package' !== $active && $package" href="{$package|packageUrl}" title="Summary of {$package}"><span>Package</span></a>
-					</li>
-					<li n:class="'namespace' === $active ? active" n:if="$namespaces">
-						<a n:tag-if="'namespace' !== $active && $namespace" href="{$namespace|namespaceUrl}" title="Summary of {$namespace}"><span>Namespace</span></a>
-					</li>
-					<li n:class="'class' === $active ? active" n:if="!$function && !$constant">
-						<a n:tag-if="'class' !== $active && $class" href="{$class|classUrl}" title="Summary of {$class->name}"><span>Class</span></a>
-					</li>
-					<li n:class="'function' === $active ? active" n:if="$function">
-						<a n:tag-if="'function' !== $active" href="{$function|functionUrl}" title="Summary of {$function->name}"><span>Function</span></a>
-					</li>
-					<li n:class="'constant' === $active ? active" n:if="$constant">
-						<a n:tag-if="'constant' !== $active" href="{$constant|constantUrl}" title="Summary of {$constant->name}"><span>Constant</span></a>
-					</li>
+        <div class="navbar-header">
+            <a href="index.html" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li n:class="'package' === $active ? active" n:if="$packages">
+                    <a n:tag-if="'package' !== $active && $package" href="{$package|packageUrl}" title="Summary of {$package}"><span>Package</span></a>
+                </li>
+                <li n:class="'namespace' === $active ? active" n:if="$namespaces">
+                    <a n:tag-if="'namespace' !== $active && $namespace" href="{$namespace|namespaceUrl}" title="Summary of {$namespace}"><span>Namespace</span></a>
+                </li>
+                <li n:class="'class' === $active ? active" n:if="!$function && !$constant">
+                    <a n:tag-if="'class' !== $active && $class" href="{$class|classUrl}" title="Summary of {$class->name}"><span>Class</span></a>
+                </li>
+                <li n:class="'function' === $active ? active" n:if="$function">
+                    <a n:tag-if="'function' !== $active" href="{$function|functionUrl}" title="Summary of {$function->name}"><span>Function</span></a>
+                </li>
+                <li n:class="'constant' === $active ? active" n:if="$constant">
+                    <a n:tag-if="'constant' !== $active" href="{$constant|constantUrl}" title="Summary of {$constant->name}"><span>Constant</span></a>
+                </li>
 
-					<li class="divider-vertical" n:if="$config->tree || $config->deprecated || $config->todo"></li>
+                <li class="divider-vertical" n:if="$config->tree || $config->deprecated || $config->todo"></li>
 
-					<li n:class="'tree' === $active ? active" n:if="$config->tree">
-						<a n:tag-if="'tree' !== $active" href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
-					</li>
+                <li n:class="'tree' === $active ? active" n:if="$config->tree">
+                    <a n:tag-if="'tree' !== $active" href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+                </li>
 
-					{foreach $annotationGroups as $annotation}
-						<li n:class="$active === 'annotation-group-' . $annotation ? active">
-							<a n:tag-if="$active !== 'annotation-group-' . $annotation" href="annotation-group-{$annotation}.html" title="List of elements with {$annotation} annotation">
-								<span>{$annotation|firstUpper}</span>
-							</a>
-						</li>
-					{/foreach}
+                {foreach $annotationGroups as $annotation}
+                    <li n:class="$active === 'annotation-group-' . $annotation ? active">
+                        <a n:tag-if="$active !== 'annotation-group-' . $annotation" href="annotation-group-{$annotation}.html" title="List of elements with {$annotation} annotation">
+                            <span>{$annotation|firstUpper}</span>
+                        </a>
+                    </li>
+                {/foreach}
 
-					<li class="divider-vertical" n:if="$config->download"></li>
+                <li class="divider-vertical" n:if="$config->download"></li>
 
-					<li n:if="$config->download">
-						<a href="{$archive}" title="Download documentation as ZIP archive"><span>Download</span></a>
-					</li>
-				</ul>
-			</div>
-		</div>
+                <li n:if="$config->download">
+                    <a href="{$archive}" title="Download documentation as ZIP archive"><span>Download</span></a>
+                </li>
+            </ul>
+        </div>
 	</nav>
 
 	<div id="left">
