@@ -1,3 +1,34 @@
+jQuery(document).ready(function () {
+
+	function adjustSidebarOverflowing() {
+		var sidebar = document.body.querySelector('.sidebar')
+
+		if (!sidebar)
+		{
+			return
+		}
+
+		sidebar.classList.add('computing')
+
+		var menu = sidebar.querySelector('#menu')
+		var max = 0
+
+		Array.prototype.forEach.call(menu.querySelectorAll('*'), function (el) {
+
+			max = Math.max(max, el.scrollWidth)
+
+		})
+
+		var method = max > menu.clientWidth ? 'add' : 'remove'
+
+		sidebar.classList[method]('overflowing')
+		sidebar.classList.remove('computing')
+	}
+
+	adjustSidebarOverflowing()
+
+})
+
 $(window).load(function() {
 	var $right = $('#right');
 	var $groups = $('#groups');

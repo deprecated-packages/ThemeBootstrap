@@ -77,12 +77,32 @@ pre code {
 /* sidebar */
 
 .sidebar {
-	overflow: auto;
-	width: 270px;
-	height: 100%;
 	position: fixed;
+	height: 100%;
+	width: 270px;
+    min-width: 270px;
 	border-right: 1px solid #ededed;
+    border-top: 1px solid #ededed;
     box-sizing: border-box;
+    background: white;
+    margin-top: -1px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar:hover {
+    width: auto;
+    z-index: 2;
+}
+
+.sidebar.overflowing:hover {
+    box-shadow: 10px 20px 20px rgba(0,0,0,.1);
+}
+
+/* forced style to compute overflowing */
+.sidebar.computing {
+    width: 270px !important;
+    overflow-x: hidden !important;
 }
 
 .search-query {
