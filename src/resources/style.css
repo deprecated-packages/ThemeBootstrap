@@ -341,7 +341,7 @@ table.summary {
 
 .summary .element {
 	position: relative;
-	padding-top: 1rem;
+	padding: 1rem 0;
 }
 
 .summary .element.expandable {
@@ -366,8 +366,9 @@ table.summary {
 	border-top: 1px solid #ededed;
 }
 
-.summary .element + .element {
-	margin-top: 1rem;
+.summary tr:last-child td,
+.summary .element:last-child {
+	border-bottom: 1px solid #ededed;
 }
 
 .summary td hr {
