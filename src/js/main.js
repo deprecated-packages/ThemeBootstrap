@@ -1,9 +1,5 @@
 $(window).load(function() {
-	var $navigation = $('#navigation');
-	var navigationHeight = $navigation.height();
-	var $left = $('#left');
 	var $right = $('#right');
-	var $rightInner = $('#rightInner');
 	var $groups = $('#groups');
 	var $content = $('#content');
 
@@ -131,25 +127,6 @@ $(window).load(function() {
 
 		})
 	}
-
-	function setNavigationPosition()
-	{
-		var height = $(window).height() - navigationHeight;
-		$left.height(height);
-		$right.height(height);
-	}
-	function setContentWidth()
-	{
-		var width = $rightInner.width();
-		$rightInner
-			.toggleClass('medium', width <= 960)
-			.toggleClass('small', width <= 650);
-	}
-	setNavigationPosition();
-	setContentWidth();
-	$(window)
-		.resize(setNavigationPosition)
-		.resize(setContentWidth);
 
 	// Select selected lines
 	var matches = window.location.hash.substr(1).match(/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/);
