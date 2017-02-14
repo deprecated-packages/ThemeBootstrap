@@ -402,16 +402,46 @@ table.summary {
 	line-height: 24px;
 }
 
-.name, .attributes {
-	white-space: nowrap;
+code.signature {
+	display: block;
+	background: transparent;
+	padding: 0;
+	white-space: normal;
+	color: #737373;
 }
 
-.signature {
-    white-space: normal;
+code.signature .name,
+code.signature .parameter,
+code.parameter {
+	color: #369;
 }
 
-.signature .attributes {
+code.signature .modifier {
 	float: right;
+	opacity: .6;
+}
+
+code.signature .type {
+	color: #693;
+}
+
+code.signature .modifier,
+code.signature .initializer {
+	color: #936;
+}
+
+code.signature code,
+code.signature var,
+code.parameter {
+	padding: 0;
+	border: 0;
+	font-style: normal;
+	background: transparent;
+}
+
+code.signature code,
+code.signature var {
+	font-size: inherit;
 }
 
 .class .methods .name, .class .properties .name, .class .constants .name {

@@ -106,21 +106,25 @@
 			{var $annotations = $method->annotations}
 			<a class="anchor" href="#{if $method->magic}m{/if}_{$method->name}"></a>
 			<code class="signature">
-				<span class="attributes">
+				<span class="modifier">
 				{if !$class->interface && $method->abstract}abstract{elseif $method->final}final{/if} {if $method->protected}protected{elseif $method->private}private{else}public{/if} {if $method->static}static{/if}
 				{if $method->returnsReference()}&amp;{/if}
 				</span>
 
-				<span n:class="name, $method->deprecated ? deprecated">{block|strip}
+				<span n:class="$method->deprecated ? deprecated">{block|strip}
 					{if $class->internal}
 						<a href="{$method|manualUrl}" title="Go to PHP documentation">{$method->name}</a>(
 					{else}
-						<a n:tag-if="$config->sourceCode" href="{$method|sourceUrl}" title="Go to source code">{$method->name}</a>(
+						<a n:tag-if="$config->sourceCode" href="{$method|sourceUrl}" title="Go to source code"><span class="name">{$method->name}</span></a>(
 					{/if}
+					{if $method->parameters}
 					{foreach $method->parameters as $parameter}
-						<span>{$parameter->typeHint|typeLinks:$method|noescape}
-						<var>{if $parameter->passedByReference}&amp; {/if}${$parameter->name}</var>{if $parameter->defaultValueAvailable} = {$parameter->defaultValueDefinition|highlightPHP:$class|noescape}{elseif $parameter->unlimited},…{/if}</span>{sep}, {/sep}
+						<span class="method-param"><span n:if="$parameter->typeHint" class="type">{$parameter->typeHint|typeLinks:$method|noescape}</span>
+						<code class="parameter">{if $parameter->passedByReference}&amp; {/if}${$parameter->name}</code><span class="initializer">{if $parameter->defaultValueAvailable} = {$parameter->defaultValueDefinition|noescape}</span>{elseif $parameter->unlimited},…{/if}</span>{sep}, {/sep}
 					{/foreach}
+					{else}
+						void
+					{/if}
 					){/block}
 				</span>
 
@@ -153,7 +157,7 @@
 					<h4>Parameters</h4>
 					<div class="list"><dl>
 					{foreach $method->parameters as $parameter}
-						<dt><var>${$parameter->name}</var>{if $parameter->unlimited},…{/if}</dt>
+						<dt><code class="parameter">${$parameter->name}</code>{if $parameter->unlimited},…{/if}</dt>
 						<dd>{$parameter->description|description:$method|noescape}</dd>
 					{/foreach}
 					</dl></div>
@@ -324,7 +328,7 @@
 		<div data-order="{$property->name}" id="{if $property->magic}m{/if}${$property->name}" n:class="element">
 			<a href="#{if $property->magic}m{/if}${$property->name}" class="anchor"></a>
 			<code class="signature">
-				<span class="attributes">
+				<span class="modifier">
 				{if $property->protected}protected{elseif $property->private}private{else}public{/if} {if $property->static}static{/if} {if $property->readOnly}read-only{elseif $property->writeOnly}write-only{/if}
 				</span>
 
@@ -336,7 +340,7 @@
 				{/if}
 				</span>
 
-				<span class="type" n:if="$property->typeHint">: {$property->typeHint|typeLinks:$property|noescape}</span>
+				{if $property->typeHint}: <span class="type">{$property->typeHint|typeLinks:$property|noescape}</span>{/if}
 			</code>
 
 			<div n:if="$config->template['options']['elementDetailsCollapsed']" class="description short">
