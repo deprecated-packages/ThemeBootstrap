@@ -16,7 +16,7 @@
 
         sidebar.classList.add('computing')
 
-        var menu = sidebar.querySelector('#menu')
+        var menu = sidebar.querySelector('.sidebar nav')
         var max = 0
 
         forEach(menu.querySelectorAll('*'), function (el) {
@@ -86,6 +86,34 @@
 
 		    })
 	    }
+
+		/**
+		 * Events
+		 */
+		$(document.body).on('click', '.sidebar-toggle', function () {
+
+			document.body.classList.toggle('show-sidebar')
+			this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') == 'true' ? 'false' : 'true')
+
+		})
+
+	    $(document.body).on('click', '.veil', function () {
+
+		    document.body.classList.remove('show-sidebar')
+
+	    })
+
+	    $(document.body).on('focus', '.search-query', function () {
+
+		    document.body.classList.add('in-search')
+
+	    })
+
+	    $(document.body).on('blur', '.search-query', function () {
+
+		    document.body.classList.remove('in-search')
+
+	    })
 
     })
 } ()
