@@ -124,8 +124,10 @@ code var {
 }
 
 code code::before,
-code code::after {
-	content: "";
+code code::after,
+pre code::before,
+pre code::after {
+	display: none;
 }
 
 pre code {
@@ -743,25 +745,36 @@ footer {
 
 /* Source code */
 #source {
-	margin: 1em 0 1em 1em;
-	border: 1px solid #ccc;
-	border-radius: 4px;
 	overflow: auto;
 }
 
 #source pre {
 	padding: 0;
 	border: none;
+	border-radius: 0;
 	overflow: visible;
 }
 
 #source .numbers {
 	float: left;
 	background-color: transparent;
+	border-right: 1px solid #EEEEEE;
+	margin-right: 1rem;
+	padding-left: 1rem;
+}
+
+#source .numbers code {
+	opacity: .6;
 }
 
 #source .code {
+	background: transparent;
+}
 
+#source .numbers,
+#source .code {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
 }
 
 .php-keyword1 {
@@ -800,7 +813,7 @@ span.l {
 }
 
 span.l.selected {
-	background: #f9f2d2;
+	background: rgba(0, 140, 255, .05);
 }
 
 span.l a {
