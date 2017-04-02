@@ -432,7 +432,7 @@ $.Autocompleter = function(input, options) {
 
 $.Autocompleter.defaults = {
 	inputClass: "ac_input",
-	resultsClass: "ac_results",
+	resultsClass: "search-suggestion",
 	loadingClass: "ac_loading",
 	minChars: 1,
 	delay: 400,
@@ -596,7 +596,7 @@ $.Autocompleter.Cache = function(options) {
 
 $.Autocompleter.Select = function (options, input, select, config) {
 	var CLASSES = {
-		ACTIVE: "ac_over"
+		ACTIVE: "search-suggestion-highlight"
 	};
 
 	var listItems,
@@ -614,7 +614,6 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		element = $("<div/>")
 		.hide()
 		.addClass(options.resultsClass)
-		.css("position", "absolute")
 		.appendTo(document.body)
 		.hover(function(event) {
 		  // Browsers except FF do not fire mouseup event on scrollbars, resulting in mouseDownOnSelect remaining true, and results list not always hiding.
@@ -640,9 +639,6 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		}).mouseup(function() {
 			config.mouseDownOnSelect = false;
 		});
-
-		if( options.width > 0 )
-			element.css("width", options.width);
 
 		needsInit = false;
 	}
@@ -701,7 +697,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			var formatted = options.formatItem(data[i].data, i+1, max, data[i].value, term);
 			if ( formatted === false )
 				continue;
-			var li = $("<li/>").html( options.highlight(formatted, term) ).addClass(i%2 == 0 ? "ac_even" : "ac_odd").appendTo(list)[0];
+			var li = $("<li/>").html( options.highlight(formatted, term) ).appendTo(list)[0];
 			$.data(li, "ac_data", data[i]);
 		}
 		listItems = list.find("li");
@@ -754,31 +750,9 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		},
 		show: function() {
 			var offset = $(input).offset();
-			element.css({
-				width: typeof options.width == "string" || options.width > 0 ? options.width : $(input).width(),
-				top: offset.top + input.offsetHeight,
-				left: offset.left
-			}).show();
+			element.show();
             if(options.scroll) {
                 list.scrollTop(0);
-                list.css({
-					maxHeight: options.scrollHeight,
-					overflow: 'auto'
-				});
-
-                if(navigator.userAgent.indexOf("MSIE") != -1 && typeof document.body.style.maxHeight === "undefined") {
-					var listHeight = 0;
-					listItems.each(function() {
-						listHeight += this.offsetHeight;
-					});
-					var scrollbarsVisible = listHeight > options.scrollHeight;
-                    list.css('height', scrollbarsVisible ? options.scrollHeight : listHeight );
-					if (!scrollbarsVisible) {
-						// IE doesn't recalculate width when scrollbar disappears
-						listItems.width( list.width() - parseInt(listItems.css("padding-left")) - parseInt(listItems.css("padding-right")) );
-					}
-                }
-
             }
 		},
 		selected: function() {

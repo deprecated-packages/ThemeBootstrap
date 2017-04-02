@@ -5,7 +5,7 @@
 
 {block content}
 <div id="content" class="function">
-	<h1 n:class="$function->deprecated ? deprecated">Function {$function->shortName}</h1>
+	<h1 n:class="$function->deprecated ? deprecated"><span class="type">Function</span> {$function->shortName}</h1>
 
 	{if $function->valid}
 
@@ -31,50 +31,44 @@
 	{var $annotations = $function->annotations}
 
 	{if count($function->parameters)}
-	<div class="panel panel-default">
-        <div class="panel-heading"><h2>Parameters summary</h2></div>
-		<table class="summary table table-bordered table-striped" id="parameters">
-		<tr n:foreach="$function->parameters as $parameter" id="${$parameter->name}">
-			<td class="name"><code>{$parameter->typeHint|typeLinks:$function|noescape}</code></td>
-			<td class="value"><code>{block|strip}
-				<var>{if $parameter->passedByReference}&amp; {/if}${$parameter->name}</var>{if $parameter->defaultValueAvailable} = {$parameter->defaultValueDefinition|highlightPHP:$function|noescape}{elseif $parameter->unlimited},…{/if}
-			{/block}</code></td>
-			<td>{$parameter->description|description:$function}</td>
-		</tr>
-		</table>
-	</div>
+	<h2>Parameters summary</h2>
+	<table class="summary" id="parameters">
+	<tr n:foreach="$function->parameters as $parameter" id="${$parameter->name}">
+		<td class="name"><code>{$parameter->typeHint|typeLinks:$function|noescape}</code></td>
+		<td class="value"><code>{block|strip}
+			<var>{if $parameter->passedByReference}&amp; {/if}${$parameter->name}</var>{if $parameter->defaultValueAvailable} = {$parameter->defaultValueDefinition|highlightPHP:$function|noescape}{elseif $parameter->unlimited},…{/if}
+		{/block}</code></td>
+		<td>{$parameter->description|description:$function}</td>
+	</tr>
+	</table>
 	{/if}
 
 	{if isset($annotations['return']) && 'void' !== $annotations['return'][0]}
-	<div class="panel panel-default">
-        <div class="panel-heading"><h2>Return value summary</h2></div>
-		<table class="summary table table-bordered table-striped" id="returns">
-		<tr>
-			<td class="name"><code>
-				{$annotations['return'][0]|typeLinks:$function|noescape}
-			</code></td>
-			<td>
-				{$annotations['return'][0]|description:$function|noescape}
-			</td>
-		</tr>
-		</table>
-	</div>
+	<h2>Return value summary</h2>
+	<table class="summary" id="returns">
+	<tr>
+		<td class="name"><code>
+			{$annotations['return'][0]|typeLinks:$function|noescape}
+		</code></td>
+		<td>
+			{$annotations['return'][0]|description:$function|noescape}
+		</td>
+	</tr>
+	</table>
 	{/if}
 
 	{if isset($annotations['throws'])}
-	<div class="panel panel-default">
-        <div class="panel-heading"><h2>Thrown exceptions summary</h2></div>
-		<table class="summary table table-bordered table-striped" id="throws">
-		<tr n:foreach="$annotations['throws'] as $throws">
-			<td class="name"><code>
-				{$throws|typeLinks:$function|noescape}
-			</code></td>
-			<td>
-				{$throws|description:$function|noescape}
-			</td>
-		</tr>
-		</table>
-	</div>
+	<h2>Thrown exceptions summary</h2>
+	<table class="summary" id="throws">
+	<tr n:foreach="$annotations['throws'] as $throws">
+		<td class="name"><code>
+			{$throws|typeLinks:$function|noescape}
+		</code></td>
+		<td>
+			{$throws|description:$function|noescape}
+		</td>
+	</tr>
+	</table>
 	{/if}
 
 	{else}
